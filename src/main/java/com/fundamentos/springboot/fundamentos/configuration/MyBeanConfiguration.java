@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 
 import com.fundamentos.springboot.fundamentos.bean.MyBean;
 import com.fundamentos.springboot.fundamentos.bean.MyBeanTwoImplement;
+import com.fundamentos.springboot.fundamentos.bean.MyBeanWithDependencyImplement;
+import com.fundamentos.springboot.fundamentos.bean.MyOperation;
+import com.fundamentos.springboot.fundamentos.bean.MyOperationImplement;
 
 @Configuration
 public class MyBeanConfiguration {
@@ -14,4 +17,13 @@ public class MyBeanConfiguration {
 		return new MyBeanTwoImplement();
 	}
 
+	@Bean
+	public MyOperation beanOperationOp() {
+		return new MyOperationImplement();
+	}
+
+	@Bean
+	public MyBeanWithDependencyImplement beanOperationWithDependency(MyOperation myOperation) {
+		return new MyBeanWithDependencyImplement(myOperation);
+	}
 }

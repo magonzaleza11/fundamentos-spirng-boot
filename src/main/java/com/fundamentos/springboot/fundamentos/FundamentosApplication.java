@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.fundamentos.springboot.fundamentos.bean.MyBean;
+import com.fundamentos.springboot.fundamentos.bean.MyBeanWithDependencyImplement;
 import com.fundamentos.springboot.fundamentos.component.ComponentDependency;
 
 @SpringBootApplication
@@ -14,11 +15,13 @@ public class FundamentosApplication implements CommandLineRunner {
 	// Inyeccion de dependencia
 	private ComponentDependency componentDependency;
 	private MyBean myBean;
+	private MyBeanWithDependencyImplement myBeanDependency;
 
 	public FundamentosApplication(@Qualifier("componentTwoImplement") ComponentDependency componentDependenc,
-			MyBean myBean) {
+			MyBean myBean, MyBeanWithDependencyImplement beanWithDependencyImplement) {
 		this.componentDependency = componentDependenc;
 		this.myBean = myBean;
+		this.myBeanDependency = beanWithDependencyImplement;
 	}
 
 	public static void main(String[] args) {
@@ -30,5 +33,6 @@ public class FundamentosApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		componentDependency.saludar();
 		myBean.print();
+		myBeanDependency.printWithDependency();
 	}
 }
